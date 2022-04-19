@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="AccountDetails" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template if:true={Opportunity.data}>
+                <template for:each={Opportunity.data} for:item="opp">
+                    <p key={Opporunity.Id}>{opportunities}</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

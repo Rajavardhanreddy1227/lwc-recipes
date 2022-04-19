@@ -1,0 +1,22 @@
+<aura:component controller="QueryClass" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride" access="global" >
+    <!--p>Contact Recordpage</p-->
+    <aura:attribute name="objectName" type="String" default="Student__c"/> 
+    <aura:attribute name="recordId" type="Id" /> 
+    <aura:attribute name="allfields" type="List" default="[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     Contact Record Id: <strong>{!v.recordId}</strong> <br/><br/>
+     <lightning:outputField fieldName="Name" />
+    
+    <!--Component-->
+    <lightning:recordForm aura:id="CreateForm" recordId="{!v.recordId}" objectApiName="{!v.objectName}"  > 
+        <lightning:messages /> 
+        <div class="slds-grid slds-wrap">
+        <aura:iteration items="{!v.allfields}" var="field"> 
+            <div class="slds-col slds-size_1-of-2">
+                <lightning:outputField fieldName="{!field}" readonly="true"/>
+               
+            </div> 
+        </aura:iteration> 
+        </div>
+    </lightning:recordForm>
+</aura:component>

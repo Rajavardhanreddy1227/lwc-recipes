@@ -1,0 +1,14 @@
+<apex:page Controller="importDataFromCSVController"> 
+  <apex:sectionHeader title="Attach File "/>
+  <apex:form >
+  <apex:pageBlock >
+      <apex:pageBlockButtons >
+          <apex:commandButton value="Attach New File" action="{!AttachNewFile}"/>
+      </apex:pageBlockButtons>
+
+      <apex:pageBlockSection >     
+          <apex:inputFile value="{!Attach}"></apex:inputFile>         
+      </apex:pageBlockSection>    
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

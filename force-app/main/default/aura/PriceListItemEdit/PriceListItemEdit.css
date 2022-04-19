@@ -1,0 +1,18 @@
+/**
+ * Copyright (c) 2019 ForeFront, Inc. All Rights Reserved. Subject to ForeFront, Inc. licensing.
+ */
+
+.THIS .extraHeight{
+    margin-bottom: 24px;
+}
+.THIS .customRequired {
+    font-weight: 400;
+
+}
+
+.THIS .customRequired:before {
+    content: "*";
+    margin: 0 0.125rem 0 0.125rem;
+    color: rgb(194, 57, 52);
+    float: left;
+}

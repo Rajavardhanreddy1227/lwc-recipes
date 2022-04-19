@@ -1,0 +1,115 @@
+<!--
+ - Copyright (c) 2019 ForeFront, Inc. All Rights Reserved. Subject to ForeFront, Inc. licensing.
+ -->
+
+<aura:component description="PriceListItemEdit"    implements="force:hasRecordId">
+    <aura:attribute type="String" name="recordId"/>
+    <aura:attribute type="Boolean" name="isActive"/>
+    <aura:attribute type="Boolean" name="showSpinner"/>
+    <aura:attribute type="Object" name="priceListItem"/>
+    <aura:attribute type="Object" name="record"/>
+    <aura:attribute type="String" name="recordLoadError"/>
+
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Pricelist_Type__c"
+                      targetFields="{!v.priceListItem}"
+                      targetRecord="{!v.record}"
+                      targetError="{!v.recordLoadError}"
+    />
+
+    <aura:method name="childMethod" action="{!c.handleSubmit}" access="PUBLIC"/>
+
+    <aura:if isTrue="{!v.priceListItem.Pricelist_Type__c == 'Temporary'}">
+        <lightning:recordEditForm
+                aura:id="recordEditForm"
+                objectApiName="Apttus_Config2__PriceListItem__c"
+                recordId="{!v.recordId}"
+                onload="{!c.handleLoad}"
+                onsubmit="{!c.handleSubmit}"
+                onerror="{!c.handleError}"
+                onsuccess="{!c.handleSuccess}" >
+            <lightning:messages />
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <lightning:inputField variant="label-stacked" fieldName="Business_Unit__c"
+                                          value="{!v.priceListItem.Business_Unit__c}"/>
+                    <lightning:inputField variant="label-stacked" fieldName="Contract_Number__c"
+                                          value="{!v.priceListItem.Contract_Number__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Order_Quantity__c"
+                                          value="{!v.priceListItem.Order_Quantity__c}"/>
+                    <lightning:inputField class="customRequired" value="{!v.priceListItem.Copies_Per_Order__c}" variant="label-stacked" fieldName="Copies_Per_Order__c"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Quoted_Price__c"
+                                          value="{!v.priceListItem.Quoted_Price__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Quoted_Freight__c"
+                                          value="{!v.priceListItem.Quoted_Freight__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Apttus_Config2__EffectiveDate__c"
+                                          value="{!v.priceListItem.Apttus_Config2__EffectiveDate__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Apttus_Config2__ExpirationDate__c"
+                                          value="{!v.priceListItem.Apttus_Config2__ExpirationDate__c}"/>
+
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Quoted_Delivered_Price__c"
+                                          value="{!v.priceListItem.Quoted_Delivered_Price__c}"/>   
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Minimum_Quantity__c"
+                                          value="{!v.priceListItem.Minimum_Quantity__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Maximum_Quantity__c"
+                                          value="{!v.priceListItem.Maximum_Quantity__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Maximum_Copy_Count__c"
+                                          value="{!v.priceListItem.Maximum_Copy_Count__c}"/>
+
+                    
+                    <!--<lightning:inputField class="customRequired" variant="label-stacked" fieldName="Quoted_Delivered_Price__c"
+                                          value="{!v.priceListItem.Quoted_Delivered_Price__c}"/>-->
+                </div>
+
+                <div class="slds-col slds-size_1-of-2 slds-p-left_x-small">
+
+                    <lightning:inputField class="customRequired" value="{!v.priceListItem.Reason_for_Upcharge__c}" variant="label-stacked" fieldName="Reason_for_Upcharge__c"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Upcharge_Description__c"
+                                          value="{!v.priceListItem.Upcharge_Description__c}"/>
+                    <lightning:inputField class="customRequired" variant="label-stacked" fieldName="Upcharge_Plant_Impacted__c"
+                                          value="{!v.priceListItem.Upcharge_Plant_Impacted__c}"/>
+                    <lightning:inputField variant="label-stacked" fieldName="Upcharge_to_be_billed_seperately__c"
+                                          value="{!v.priceListItem.Upcharge_to_be_billed_seperately__c}"/>
+                    <lightning:inputField variant="label-stacked" fieldName="Lot_charge_amount_to_be_billed__c"
+                                          value="{!v.priceListItem.Lot_charge_amount_to_be_billed__c}"/>
+                    <lightning:inputField variant="label-stacked" fieldName="Temporary_Period_Days__c" aura:id = "temp_period"
+                                          value="{!v.priceListItem.Temporary_Period_Days__c}" onchange="{!c.temporaryDaysChanged}" />
+                    <lightning:inputField variant="label-stacked" fieldName="Blanket_Number__c"
+                                          value="{!v.priceListItem.Blanket_Number__c }" aura:id = "blanket_number" class=""/>
+                    <lightning:inputField variant="label-stacked" fieldName="Apttus_Config2__PriceType__c"
+                                          value="{!v.priceListItem.Apttus_Config2__PriceType__c }" aura:id = "priceType" class=""/>
+                </div>
+            </div>
+
+        </lightning:recordEditForm>
+       <!-- <lightning:recordForm
+                aura:id="recordEditForm"
+                recordId="{!v.recordId}"
+                objectApiName="Apttus_Config2__PriceListItem__c"
+                layoutType="Full"
+                density="comfy"
+                mode="edit"
+                columns="2"
+                onload="{!c.handleLoad}"
+                onerror="{!c.handleError}"
+                onsubmit="{!c.handleSubmit}"
+                oncancel="{!c.handleCancel}"
+                onsuccess="{!c.handleSuccess}"/> -->
+        <aura:set attribute="else">
+            <lightning:recordForm
+                    aura:id="recordForm"
+                    recordId="{!v.recordId}"
+                    objectApiName="Apttus_Config2__PriceListItem__c"
+                    layoutType="Full"
+                    density="comfy"
+                    mode="edit"
+                    columns="2"
+                    onload="{!c.handleLoad}"
+                    onerror="{!c.handleError}"
+                    onsubmit="{!c.handleSubmit}"
+                    oncancel="{!c.handleCancel}"
+                    onsuccess="{!c.handleSuccess}"/>
+        </aura:set>
+    </aura:if>
+</aura:component>

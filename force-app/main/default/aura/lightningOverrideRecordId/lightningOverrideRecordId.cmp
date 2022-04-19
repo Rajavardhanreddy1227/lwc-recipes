@@ -1,0 +1,7 @@
+<aura:component controller="QueryClass" implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride">
+    <aura:attribute name="account" type="Account"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <lightning:card iconName="standard:product" title="{!v.account.Name}">
+    </lightning:card>
+</aura:component>

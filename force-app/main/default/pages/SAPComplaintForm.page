@@ -1,0 +1,50 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="true" standardController="SAP_Complaint__c" extensions="SAPComplaintController" action="{!Sapcallout}" recordSetVar="SAP_Complaint__c">
+    <apex:form > 
+        <apex:pageBlock title="SAP COMPLAINT">
+            <apex:sectionHeader title="Enter the below Notification number"/>
+            <apex:pageBlockSection collapsible="false">
+                <apex:outputLabel value="Enter Notification Number" for="NotificationNUM"></apex:outputLabel>
+                <apex:inputtext id="NotificationNUM" value="{!Notification_Num}"/>
+                <!-- <apex:commandButton value="submit" action="{!Sapcallout}" reRender="SAPPanel,sapPanal1"  /> -->
+            </apex:pageBlockSection>
+            <apex:sectionHeader title="Input Fields from SAP (Readonly)"/>
+            <apex:panelGrid columns="2" >
+                <apex:outputPanel id="SAPPanel">
+                    
+                    <apex:pageBlockSection collapsible="false">
+                        <apex:outputLabel value="symbol" for="symbol"></apex:outputLabel>
+                        <apex:OutPuttext id="Symbol" value="{!Sapcomplaint.Symbol__c}" label=""/>
+                        <apex:outputLabel value="name" for="name"></apex:outputLabel>
+                        <apex:OutPuttext id="name" value="{!Sapcomplaint.name}" label=""/>
+                        <apex:outputLabel value="exchange" for="exchange"></apex:outputLabel>
+                        <apex:OutPuttext id="exchange" value="{!Sapcomplaint.exchange__c}" label=""/>
+                        <apex:outputLabel value="Material #" for="MaterialNum"></apex:outputLabel>
+                        <apex:OutPuttext id="MaterialNum" label=""/>
+                        <apex:outputLabel value="Material Description" for="MaterialDescription"></apex:outputLabel>
+                        <apex:OutPuttext id="MaterialDescription" label=""/>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+                <apex:outputPanel >
+                    <apex:pageBlockSection id="sapPanal1">
+                        <apex:outputLabel value="Defect Type Name" for="DefectTypeName"></apex:outputLabel>
+                        <apex:OutPuttext id="DefectTypeName"/>
+                        <apex:outputLabel value="Customer Complaint Points" for="CustomerComplaintPoints"></apex:outputLabel>
+                        <apex:OutPuttext id="CustomerComplaintPoints"/>
+                        <apex:outputLabel value="Customer Downtime Minutes" for="CustomerDowntimeMinutes"></apex:outputLabel>
+                        <apex:OutPuttext id="CustomerDowntimeMinutes"/>
+                        <apex:outputLabel value="Work Order #" for="WorkOrderNum"></apex:outputLabel>
+                        <apex:OutPuttext id="WorkOrderNum"/>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+                
+            </apex:panelGrid>
+            <apex:outputPanel style="float:centre">
+                <apex:commandButton value="Save" action="{!saveSAP}" reRender="SAPPanel"/>
+                <apex:commandButton value="Cancel" action="{!Cancel}" reRender="SAPPanel"/>
+                
+            </apex:outputPanel>
+            
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

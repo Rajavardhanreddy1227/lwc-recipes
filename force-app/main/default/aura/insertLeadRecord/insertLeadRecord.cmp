@@ -1,0 +1,9 @@
+<aura:component controller="createAccountRecords" implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride"> 
+    <aura:attribute name='lea' type='Lead' default="{sobjecttype:'Lead'}"/>
+    <lightning:input label='LastName' value='{!v.lea.LastName}'/>
+    <lightning:input label='Company' value='{!v.lea.Company}'/>
+    <lightning:input label='Status' value='{!v.lea.Status}'/>  
+    
+    <lightning:button label='submit' onclick='{!c.submitfunction}'/>    
+    
+</aura:component>

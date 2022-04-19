@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="PlayBook" icon-name="custom:custom27">
+        <div class="slds-m-around_medium">
+            <template if:true={Opportunity.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={Opportunity.data}
+                    columns={columns}
+                    onsave={handleSave}
+                    draft-values={draftValues}>
+                </lightning-datatable>
+            </template>
+            <template if:true={Opportunity.error}>
+                <!-- handle Apex error -->
+            </template>
+        </div>
+    </lightning-card>
+</template>

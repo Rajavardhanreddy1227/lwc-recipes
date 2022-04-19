@@ -1,0 +1,25 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride">
+    
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:card title="Mill Boards">
+        <div class="slds-p-around_small">
+            Mill Board Id : <strong>{!v.recordId}</strong> <br/><br/>
+        </div>
+         </lightning:card>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="fields" type="String[]" default="['Name','Email']" />
+    <lightning:recordForm recordId="{!v.recordId}" 
+                          objectApiName="Account"
+                          mode="readonly"
+                          fields="{!v.fields}" />
+    
+    <lightning:layout horizontalAlign="space" verticalAlign="center" multipleRows="true">
+    <aura:iteration items="{!v.recordId}" var="v">
+        <lightning:layoutItem flexibility="auto" size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="6">
+            {!v.fields}
+        </lightning:layoutItem>
+    </aura:iteration>
+</lightning:layout>
+
+</aura:component>

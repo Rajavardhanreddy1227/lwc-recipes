@@ -1,0 +1,31 @@
+<!--template>
+    <lightning-card title="My Account Record" icon-name="standard:Opportunity">
+            <div class="slds-m-around_medium">
+                <p>My name is </p>
+            </div>
+            <lightning-datatable data={Opportunities} columns={columns} key-field="Id">
+            </lightning-datatable>
+    
+    </lightning-card>
+    
+</template-->
+<template>
+
+    <div class="slds-m-around_medium">
+        <h1 class="slds-text-heading_small">Required Documents List</h1>
+    </div>
+
+    <div class="c-container">
+            <lightning-layout>
+                <lightning-layout-item padding="around-small">
+                        <lightning-layout-item padding="around-small">
+                                    <lightning-button
+                                        label="Generate RDL"
+                                        onclick={handleNewClick}>
+                                    </lightning-button>
+                        </lightning-layout-item>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+</template>
